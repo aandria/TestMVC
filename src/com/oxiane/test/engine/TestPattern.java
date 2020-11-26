@@ -54,7 +54,9 @@ public class TestPattern {
         pattern.ThreadSleep(30000);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void launchProgram(TestPattern pattern) {
+		testmodel.addObserver(testview);
 		
 		TestModel.MyTimerTaskModel timerTaskModel = testmodel.new MyTimerTaskModel();
 		TestControler.MyTimerTaskControler timerTaskControler = testcontroler.new MyTimerTaskControler();
@@ -72,7 +74,6 @@ public class TestPattern {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		testmodel.addObserver(testview);
 		TestPattern pattern = new TestPattern();
 		pattern.launchProgram(pattern);
 	}
