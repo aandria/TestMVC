@@ -71,7 +71,6 @@ public class TestPattern {
 	}
 
 	
-	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TestPattern pattern = new TestPattern();

@@ -8,9 +8,6 @@ public class TestModel extends Observable{
 	
 	private int variable = 0;
 	
-	public TestModel() {
-		// TODO Auto-generated constructor stub
-	}
 	
 	public void increment() {
 		variable++;
