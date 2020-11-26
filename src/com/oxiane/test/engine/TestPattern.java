@@ -11,9 +11,9 @@ import com.oxiane.test.vue.TestView;
 
 public class TestPattern {
 
-	private static TestModel testmodel = new TestModel();
-	private static TestView testview = new TestView();
-	private static TestControler testcontroler = new TestControler(testmodel);
+	private TestModel testmodel = new TestModel();
+	private TestView testview = new TestView();
+	private TestControler testcontroler = new TestControler(testmodel);
 	
 	public Timer CreateTimer() {
 		Timer timer= new Timer(true);
@@ -67,7 +67,7 @@ public class TestPattern {
 		
 		pattern.CancelTimerTask(pattern, timerModel, timerControler);
 	}
-//
+
 	
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
