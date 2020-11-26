@@ -7,7 +7,7 @@ import java.util.TimerTask;
 import com.oxiane.test.vue.utils.Utils;
 
 @SuppressWarnings("deprecation")
-public class TestModel extends Observable{
+public class TestModel extends Observable implements ITestModel4TestView {
 	
 	private int variable = 0;
 	private MyTimerTaskModel myTimerTaskModel;
@@ -54,5 +54,9 @@ public class TestModel extends Observable{
 	            e.printStackTrace();
 	        }
 	    }
+	}
+	
+	public void cancel() {
+		timerModel.cancel();
 	}
 }

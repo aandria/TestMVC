@@ -10,9 +10,9 @@ import com.oxiane.test.vue.TestView;
 
 public class TestPattern {
 
-	private TestModel testModel = new TestModel();
-	private TestView testView = new TestView();
-	private TestControler testControler = new TestControler(testModel);
+	private TestModel testModel;
+	private TestView testView;
+	private TestControler testControler;
 	
 	// méthode à supprimer ici
 	public Timer CreateTimer() {
@@ -40,32 +40,44 @@ public class TestPattern {
         }        
 	}	
 	
-	public void cancelTimerTask(TestPattern pattern, Timer timer1, Timer timer2) {
-
-		pattern.threadSleep(120000);
+	private void manageTime(Timer timer2) {
+		// 2 minutes d'actions entre le ctrl - model - view
+		threadSleep(120000);		
 		
-        pattern.timerCancel(timer1);
-        pattern.timerCancel(timer2);
+		// arrêt des timers du modèle et de la vue
+        testModel.cancel();        
+        timerCancel(timer2);
         
-        pattern.threadSleep(30000);
+        // on dort 30 secondes
+        threadSleep(30000);
 	}
 	
 	@SuppressWarnings("deprecation")
 	public void launchProgram(TestPattern pattern) {
-		testModel.addObserver(testView);
+		init();		
+		addObservers();
 		
 		TestControler.MyTimerTaskControler timerTaskControler = testControler.new MyTimerTaskControler();		
 		Timer timerControler = pattern.CreateTimer();
 		pattern.createSchedulControler(timerControler, timerTaskControler);
 		
-		// pattern.CancelTimerTask(pattern, timerModel, timerControler);
+		pattern.manageTime(timerControler);
 		while (true) {
 			
 		}
 	}
 
+	private void init() {
+		// Mise en place du MVC 
+		testModel = new TestModel();
+		testView = new TestView();
+		testControler = new TestControler(testModel);
+	}
 	
-	@SuppressWarnings("deprecation")
+	private void addObservers() {
+		testModel.addObserver(testView);
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TestPattern pattern = new TestPattern();
