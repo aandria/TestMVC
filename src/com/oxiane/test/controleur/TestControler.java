@@ -22,7 +22,7 @@ public class TestControler {
 	        try {
 	            //assuming it takes 5 secs to complete the task
 	            Thread.sleep(5000);
-	            testmodele.increment();
+	            testmodele.incVariable();
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
 	        }

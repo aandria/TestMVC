@@ -1,36 +1,45 @@
 package com.oxiane.test.modele;
 
 import java.util.Observable;
+import java.util.Timer;
 import java.util.TimerTask;
+
+import com.oxiane.test.vue.utils.Utils;
 
 @SuppressWarnings("deprecation")
 public class TestModel extends Observable{
 	
 	private int variable = 0;
+	private MyTimerTaskModel myTimerTaskModel;
+	private Timer timerModel;
 	
 	public TestModel() {
-		// TODO Auto-generated constructor stub
+		myTimerTaskModel = new MyTimerTaskModel();
+		timerModel = Utils.CreateTimer();
+		timerModel.scheduleAtFixedRate(myTimerTaskModel, 20, 10);
 	}
 	
-	public void increment() {
+	// appelée par le controleur 
+	public void incVariable() {
+		setChanged();
 		variable++;
 	}
-	
-	public void setVariable(int variable) {
-		this.variable = variable;
-	}
-	
+		
+	// appelée par la vue
 	public int getVariable() {
 		return variable;
 	}
 	
-	public void notifyChanges() {
-		setChanged();
+	private void notifyChanges() {
 		notifyObservers();
 	}
 	
-	public class MyTimerTaskModel extends TimerTask {
-
+	/**
+	 * TimerTask spécifique à TestModel
+	 * @author ext-flanic
+	 *
+	 */
+	private class MyTimerTaskModel extends TimerTask {
 	    @Override
 	    public void run() {
 	        completeTask();
