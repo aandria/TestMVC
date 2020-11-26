@@ -5,15 +5,19 @@ import java.util.Timer;
 
 import com.oxiane.test.controleur.TestControler;
 import com.oxiane.test.modele.TestModel;
+import com.oxiane.test.vue.TestView;
 
 public class TestPattern {
 
-	private TestModel testmodel = new TestModel();
-	private TestControler testcontroler = new TestControler(testmodel);
+	private static TestModel testmodel = new TestModel();
+	private static TestView testview = new TestView();
+	private static TestControler testcontroler = new TestControler(testmodel);
 	
 	
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		testmodel.addObserver(testview);
 		
 		TestModel.MyTimerTaskModel timerTaskModel = testmodel.new MyTimerTaskModel();
 		TestControler.MyTimerTaskControler timerTaskControler = testcontroler.new MyTimerTaskControler();
@@ -26,6 +30,7 @@ public class TestPattern {
         System.out.println("TimerTaskModel started");
         
         timerControler.scheduleAtFixedRate(timerTaskControler, 0, 20);
+        System.out.println("TimerTaskControler started");
         
         //cancel after sometime
         try {

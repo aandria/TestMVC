@@ -13,5 +13,6 @@ public class TestView implements Observer {
 	@Override
 	public void update(Observable testmodele, Object arg1) {
 		this.testmodele= (TestModel) testmodele;
+		System.out.println("Variable mise à jour : "+ this.testmodele.getVariable());
 	}
 }

@@ -24,9 +24,9 @@ public class TestModel extends Observable{
 		return variable;
 	}
 	
-	public void notifyObservers() {
+	public void notifyChanges() {
 		setChanged();
-		notify();
+		notifyObservers();
 	}
 	
 	public class MyTimerTaskModel extends TimerTask {
@@ -40,7 +40,7 @@ public class TestModel extends Observable{
 	        try {
 	            //assuming it takes 5 secs to complete the task
 	            Thread.sleep(5000);
-	            notifyObservers();
+	            notifyChanges();
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
 	        }
