@@ -1,5 +1,11 @@
 package com.oxiane.test.controleur;
 
-public class TestControler {
+import com.oxiane.test.modele.TestModel;
 
+public class TestControler {
+	private TestModel testmodele;
+	
+	public TestControler(TestModel testmodele) {
+		this.testmodele=testmodele;
+	}
 }
