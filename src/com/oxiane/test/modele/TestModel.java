@@ -1,15 +1,29 @@
 package com.oxiane.test.modele;
 
 import java.util.Observable;
+import java.util.Timer;
 import java.util.TimerTask;
 
+import com.oxiane.test.vue.Utils;
+
 @SuppressWarnings("deprecation")
-public class TestModel extends Observable{
+public class TestModel extends Observable implements ITestModel4TestView{
 	
 	private int variable = 0;
+	private MyTimerTaskModel myTimerTaskModel;
+	private Timer timerModel;
 	
 	
-	public void increment() {
+	public TestModel() {
+		myTimerTaskModel = new MyTimerTaskModel();
+		timerModel = Utils.CreateTimer();
+		timerModel.scheduleAtFixedRate(myTimerTaskModel, 20, 10);
+		System.out.println("TimerTaskModel started");
+	}
+	
+	
+	public void incVariable() {
+		setChanged();
 		variable++;
 	}
 	
@@ -22,7 +36,6 @@ public class TestModel extends Observable{
 	}
 	
 	public void notifyChanges() {
-		setChanged();
 		notifyObservers();
 	}
 	
@@ -41,6 +54,9 @@ public class TestModel extends Observable{
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
 	        }
-	    }
+	    }   
 	}
+	public void cancel() {
+    	timerModel.cancel();
+    }
 }
