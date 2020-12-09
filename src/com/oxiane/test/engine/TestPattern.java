@@ -1,8 +1,6 @@
 package com.oxiane.test.engine;
 
 
-import java.util.Timer;
-
 import com.oxiane.test.controleur.TestControler;
 import com.oxiane.test.modele.TestModel;
 import com.oxiane.test.vue.TestView;
@@ -13,24 +11,22 @@ public class TestPattern {
 	private TestView testView ;
 	private TestControler testControler ;
 	
-	
-	public void threadSleep(long delay) {
-		try {
-            Thread.sleep(delay);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-	}
-	
-	public void manageTime() {
-		threadSleep(120000);
-        testModel.cancel();
+	public void manageTime() throws InterruptedException {
+		//2 mins d'action entre le controleur le modèle et la vue
+		//threadSleep(120000);
+        Thread.sleep(120000);
+		
+		//arrêt du timer du modèle et du contrôleur
+		testModel.cancel();
         testControler.cancel();
-        threadSleep(30000);
+        
+        //on patiente 30 sec
+        //threadSleep(30000);
+        Thread.sleep(30000);
 	}
 	
-	public void launchProgram(TestPattern pattern) {
-		System.out.println("avant init");
+	public void launchProgram() throws InterruptedException {
+		//Initialisation des variables pour les liaisons MVC
 		init();
 		addObservers();
 		manageTime();
@@ -53,8 +49,8 @@ public class TestPattern {
 	}
 
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		TestPattern pattern = new TestPattern();
-		pattern.launchProgram(pattern);
+		pattern.launchProgram();
 	}
 }
